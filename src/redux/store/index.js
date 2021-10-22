@@ -2,9 +2,6 @@ import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
 import searchSongsReducer from "../reducers/searchSongs";
 import favorites from "../reducers/favorites";
-// this file contains 2 thinngs:
-// 11.the initial state of application
-// 2. the configureStore execution
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -17,8 +14,9 @@ export const initialState = {
 
   searchedSongs: {
     loading: false,
-    songData: [],
+    songsData: [],
     error: "",
+    searchQuery: "",
   },
 };
 

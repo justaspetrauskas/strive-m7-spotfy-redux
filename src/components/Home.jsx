@@ -2,6 +2,18 @@ import React from "react";
 import AlbumCard from "./AlbumCard";
 import { Row, Col } from "react-bootstrap";
 import uniqid from "uniqid";
+import { connect } from "react-redux";
+
+import { searchSongs } from "../redux/actions/searchSongs";
+
+const mapDispatchToProps = (dispatch) => ({
+  searchMusic: (url, searchQuery) => dispatch(searchSongs(url, searchQuery)),
+});
+
+const mapStateToProps = (s) => ({
+  searchedSongs: s.searchedSongs.songsData,
+  searchQuery: s.searchedSongs.searchQuery,
+});
 
 class Home extends React.Component {
   state = {
@@ -31,7 +43,7 @@ class Home extends React.Component {
 
   hipHopArtists = ["eminem", "snoopdogg", "lilwayne", "drake", "kanyewest"];
 
-  handleArtist = async (artistName, category) => {
+  handleArtist = async (artistName, category, searchedSongs) => {
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/deezer/search?q=" +
@@ -56,6 +68,8 @@ class Home extends React.Component {
   };
 
   componentDidMount = async () => {
+    console.log(this.props.searchQuery);
+
     let rockRandomArtists = [];
     let popRandomArtists = [];
     let hipHopRandomArtists = [];
@@ -95,6 +109,11 @@ class Home extends React.Component {
     for (let l = 0; l < hipHopRandomArtists.length; l++)
       await this.handleArtist(hipHopRandomArtists[l], "hipHopSongs");
   };
+  componentDidUpdate(prevProps) {
+    if (this.props.searchedQuery !== prevProps.searchedQuery) {
+      console.log(this.props.searchedQuery);
+    }
+  }
 
   render() {
     return (
@@ -108,21 +127,21 @@ class Home extends React.Component {
             <div>DISCOVER</div>
           </div>
         </Row>
-        {this.props.searchResults.length > 0 && (
+        {this.props.searchedSongs.length > 0 && (
           <Row>
             <Col xs={10}>
               <div id="searchResults">
                 <h2>Search Results</h2>
                 <Row className="row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3">
-                  {this.props.searchResults.map((song) => (
-                    <AlbumCard key={uniqid} key={uniqid} song={song} />
+                  {this.props.searchedSongs.map((song) => (
+                    <AlbumCard key={uniqid} song={song} />
                   ))}
                 </Row>
               </div>
             </Col>
           </Row>
         )}
-        {this.props.searchResults.length === 0 && (
+        {this.props.searchedSongs.length === 0 && (
           <>
             <Row>
               <Col xs={10}>
@@ -176,4 +195,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

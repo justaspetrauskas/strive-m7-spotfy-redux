@@ -10,7 +10,6 @@ const mapDispatchToProps = (dispatch) => ({
 class Sidebar extends React.Component {
   state = {
     searchQuery: "",
-    songs: [],
   };
 
   url = "https://striveschool-api.herokuapp.com/api/deezer/search?q=";
