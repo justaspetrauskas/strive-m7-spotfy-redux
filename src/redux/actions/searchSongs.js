@@ -1,5 +1,5 @@
 export const SEARCH_SONGS_REQUEST = "SEARCH_SONGS_REQUEST";
-export const SEARCH_SONGS_SUCCESS = "SEARCH_SONGS_SUCESS";
+export const SEARCH_SONGS_SUCCESS = "SEARCH_SONGS_SUCCESS";
 export const SEARCH_SONGS_FAILURE = "SEARCH_SONGS_FAILURE";
 export const SEARCH_SONGS_QUERY = "SEARCH_SONGS_QUERY";
 // const searchSongsRequest = (state) => {
@@ -12,21 +12,21 @@ export const SEARCH_SONGS_QUERY = "SEARCH_SONGS_QUERY";
 const searchSongsSuccess = (data) => {
   console.log(data);
   return {
-    type: "SEARCH_SONGS_SUCESS",
+    type: SEARCH_SONGS_SUCCESS,
     payload: data,
   };
 };
 
 const setSearchQuery = (query) => {
   return {
-    type: "SEARCH_SONGS_QUERY",
+    type: SEARCH_SONGS_QUERY,
     payload: query,
   };
 };
 
 const searchSongsFailure = (state) => {
   return {
-    type: "SEARCH_SONGS_FAILURE",
+    type: SEARCH_SONGS_FAILURE,
     payload: state,
   };
 };
