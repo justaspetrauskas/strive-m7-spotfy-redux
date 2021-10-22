@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
 import searchSongsReducer from "../reducers/searchSongs";
 import favorites from "../reducers/favorites";
+import playSongReducer from "../reducers/playSong";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -11,7 +12,9 @@ export const initialState = {
   favorites: {
     favSongs: [],
   },
-
+  player: {
+    currentSong: {},
+  },
   searchedSongs: {
     loading: false,
     songsData: [],
@@ -23,6 +26,7 @@ export const initialState = {
 const bigReducer = combineReducers({
   favorites: favorites,
   searchedSongs: searchSongsReducer,
+  player: playSongReducer,
 });
 
 // 2. - 3 arguments reduces, initial state

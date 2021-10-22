@@ -3,6 +3,7 @@ import {
   addSongToFav,
   removeSongFromFav,
 } from "../redux/actions/favoriteSongs";
+import { playSong } from "../redux/actions/playSong";
 import { connect } from "react-redux";
 
 const mapStateToProps = (s) => s;
@@ -10,11 +11,23 @@ const mapStateToProps = (s) => s;
 const mapDispatchToProps = (dispatch) => ({
   addToFavourites: (song) => dispatch(addSongToFav(song)),
   removeFromFavourites: (song) => dispatch(removeSongFromFav(song)),
+  addToPlayer: (song) => dispatch(playSong(song)),
 });
 
-const Song = ({ favorites, addToFavourites, removeFromFavourites, track }) => {
+const Song = ({
+  favorites,
+  addToFavourites,
+  removeFromFavourites,
+  track,
+  addToPlayer,
+}) => {
   const isFav = favorites.favSongs.includes(track.title);
   console.log(isFav);
+
+  const playSong = (e) => {
+    console.log(track.id);
+    addToPlayer(track);
+  };
 
   const toggleFavourite = (e) => {
     if (isFav) {
@@ -27,7 +40,7 @@ const Song = ({ favorites, addToFavourites, removeFromFavourites, track }) => {
   };
 
   return (
-    <div className="py-3 trackHover track">
+    <div className="py-3 trackHover track" onClick={(e) => playSong(e)}>
       <span className="track-like" onClick={(e) => toggleFavourite(e)}>
         <svg
           className="track-like-heart"
