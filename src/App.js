@@ -7,7 +7,7 @@ import Home from "./components/Home";
 import { Row } from "react-bootstrap";
 import Artist from "./components/Artist";
 import Album from "./components/Album";
-import store from './store';
+import store from './store'
 import { Provider } from 'react-redux'
 
 let headers = new Headers({
