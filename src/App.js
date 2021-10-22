@@ -7,6 +7,8 @@ import Home from "./components/Home";
 import { Row } from "react-bootstrap";
 import Artist from "./components/Artist";
 import Album from "./components/Album";
+import store from './store';
+import { Provider } from 'react-redux'
 
 let headers = new Headers({
   "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
@@ -44,21 +46,25 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router>
-        <div className="container-fluid">
-          <Row>
-            <Sidebar search={this.search} />
-            <Route
-              path="/"
-              exact
-              render={() => <Home searchResults={this.state.searchResults} />}
-            />
-            <Route path="/artist/:id" component={Artist} />
-            <Route path="/album/:id" component={Album} />
-          </Row>
-        </div>
-        <Player />
-      </Router>
+      <Provider store={store}>
+        <Router>
+        
+      <div className="container-fluid">
+        <Row>
+          <Sidebar search={this.search} />
+          <Route
+            path="/"
+            exact
+            render={() => <Home searchResults={this.state.searchResults} />}
+          />
+          <Route path="/artist/:id" component={Artist} />
+          <Route path="/album/:id" component={Album} />
+        </Row>
+      </div>
+      <Player />
+    </Router>
+    </Provider>
+      
     );
   }
 }
