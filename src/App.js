@@ -10,7 +10,7 @@ import Artist from "./components/Artist";
 import Album from "./components/Album";
 
 // redux
-import store from "./redux/store/";
+import store from "./redux/store";
 import { Provider } from "react-redux";
 
 let headers = new Headers({
@@ -19,33 +19,33 @@ let headers = new Headers({
 });
 
 class App extends React.Component {
-  state = {
-    searchResults: [],
-  };
+  // state = {
+  //   searchResults: [],
+  // };
 
-  search = async (string) => {
-    if (string.length > 2) {
-      try {
-        let response = await fetch(
-          "https://striveschool-api.herokuapp.com/api/deezer/search?q=" +
-            string,
-          {
-            method: "GET",
-            headers,
-          }
-        );
+  // search = async (string) => {
+  //   if (string.length > 2) {
+  //     try {
+  //       let response = await fetch(
+  //         "https://striveschool-api.herokuapp.com/api/deezer/search?q=" +
+  //           string,
+  //         {
+  //           method: "GET",
+  //           headers,
+  //         }
+  //       );
 
-        let result = await response.json();
-        let songs = result.data;
+  //       let result = await response.json();
+  //       let songs = result.data;
 
-        this.setState({
-          searchResults: songs,
-        });
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  };
+  //       this.setState({
+  //         searchResults: songs,
+  //       });
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   }
+  // };
 
   render() {
     return (
@@ -53,12 +53,8 @@ class App extends React.Component {
         <Router>
           <div className="container-fluid">
             <Row>
-              <Sidebar search={this.search} />
-              <Route
-                path="/"
-                exact
-                render={() => <Home searchResults={this.state.searchResults} />}
-              />
+              <Sidebar />
+              <Route path="/" exact render={() => <Home />} />
               <Route path="/artist/:id" component={Artist} />
               <Route path="/album/:id" component={Album} />
             </Row>

@@ -1,9 +1,6 @@
 import { initialState } from "../store";
 
-export default function searchSongsReducer(
-  state = initialState.searchedSongs,
-  action
-) {
+const searchSongsReducer = (state = initialState.searchedSongs, action) => {
   console.log(action, state);
 
   const { type, payload } = action;
@@ -21,9 +18,17 @@ export default function searchSongsReducer(
     case "SEARCH_SONGS_SUCCESS":
       return {
         ...state,
-        songData: payload,
+        songsData: payload,
       };
+    case "SEARCH_SONGS_QUERY": {
+      return {
+        ...state,
+        searchQuery: payload,
+      };
+    }
+
     default:
       return state;
   }
-}
+};
+export default searchSongsReducer;
