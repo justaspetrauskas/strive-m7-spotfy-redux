@@ -7,31 +7,21 @@ import thunk from "redux-thunk";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-// 1.
 export const initialState = {
-  // devide properties into chunks/subobjects
-  favJobs: {
-    favorites: [],
+  song: {
+      elements: [],
   },
-  searchQuery: {
-    query: "",
+  likedSong:{
+      elements:[]
   },
-  user: {
-    userName: "",
-  },
-  fetchedJobs: {
-    loading: false,
-    jobData: [],
-    error: "",
-  },
-};
-
-const bigReducer = combineReducers({
-  favJobs: favJobReducer,
-  searchQuery: searchQueryReducer,
-  user: userReducer,
-  fetchedJobs: fetchedJobsReducer,
-});
+  };
+  
+  const bigReducer = combineReducers ({
+      song : songReducer,
+      likedSong: likedSongReducer,
+  
+  })
+  
 
 // 2. - 3 arguments reduces, initial state
 const configureStore = createStore(
