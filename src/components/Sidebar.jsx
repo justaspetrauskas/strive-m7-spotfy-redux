@@ -1,9 +1,27 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
+import { searchSongs } from "../redux/actions/searchSongs";
+
+const mapDispatchToProps = (dispatch) => ({
+  searchMusic: (url, searchQuery) => dispatch(searchSongs(url, searchQuery)),
+});
 
 class Sidebar extends React.Component {
   state = {
-    searchInput: "",
+    searchQuery: "",
+    songs: [],
+  };
+
+  url = "https://striveschool-api.herokuapp.com/api/deezer/search?q=";
+
+  handleChange = (e) => {
+    this.setState({ searchQuery: e.target.value });
+  };
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    this.props.searchMusic(this.url, this.state.searchQuery);
   };
 
   render() {
@@ -57,11 +75,7 @@ class Sidebar extends React.Component {
                           placeholder="Search"
                           aria-label="Search"
                           aria-describedby="basic-addon2"
-                          onChange={(event) =>
-                            this.setState({
-                              searchInput: event.currentTarget.value,
-                            })
-                          }
+                          onChange={this.handleChange}
                         />
                         <div
                           className="input-group-append"
@@ -71,9 +85,7 @@ class Sidebar extends React.Component {
                             className="btn btn-outline-secondary btn-sm"
                             type="button"
                             id="button-addon1"
-                            onClick={() =>
-                              this.props.search(this.state.searchInput)
-                            }
+                            onClick={this.handleSubmit}
                           >
                             GO
                           </button>
@@ -101,4 +113,4 @@ class Sidebar extends React.Component {
   }
 }
 
-export default withRouter(Sidebar);
+export default withRouter(connect((s) => s, mapDispatchToProps)(Sidebar));
