@@ -121,6 +121,30 @@ ul {
 
 /*MAIN PAGE SECTION*/
 
+.track {
+  position: relative;
+  padding: 0.5rem 1rem;
+  display: grid;
+  grid-template-columns: 0.5fr 20fr 3fr;
+  align-items: center;
+  justify-content: start;
+  border-radius: 4px;
+}
+.track-like-heart {
+  fill: transparent;
+  stroke: rgb(255, 255, 255);
+  stroke-width: 2px;
+  transition: all 300ms;
+}
+.liked-song {
+  stroke: none;
+  fill: #ffffff;
+}
+.track-like-heart:hover {
+  stroke: none;
+  fill: #ffffff;
+}
+
 .mainLinks {
   margin-top: 1.5rem;
   justify-content: space-evenly;
@@ -168,7 +192,9 @@ ul {
   font-weight: 700;
   padding-top: 50px;
 }
-
+.trackHover {
+  margin-bottom: 0 !important;
+}
 .trackHover:hover {
   background-color: black;
   cursor: pointer;
@@ -186,7 +212,7 @@ ul {
 }
 
 .duration {
-  float: right;
+  margin-left: auto;
 }
 
 .mainButton {

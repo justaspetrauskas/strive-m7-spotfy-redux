@@ -1,6 +1,7 @@
 import React from "react";
 import AlbumCard from "./AlbumCard";
 import { Row, Col } from "react-bootstrap";
+import uniqid from "uniqid";
 
 class Home extends React.Component {
   state = {
@@ -114,7 +115,7 @@ class Home extends React.Component {
                 <h2>Search Results</h2>
                 <Row className="row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3">
                   {this.props.searchResults.map((song) => (
-                    <AlbumCard song={song} key={song.id} />
+                    <AlbumCard key={uniqid} key={uniqid} song={song} />
                   ))}
                 </Row>
               </div>
@@ -132,7 +133,7 @@ class Home extends React.Component {
                     id="rockSection"
                   >
                     {this.state.rockSongs.map((song) => (
-                      <AlbumCard song={song} key={song.id} />
+                      <AlbumCard key={uniqid} song={song} />
                     ))}
                   </Row>
                 </div>
@@ -147,7 +148,7 @@ class Home extends React.Component {
                     id="popSection"
                   >
                     {this.state.popSongs.map((song) => (
-                      <AlbumCard song={song} key={song.id} />
+                      <AlbumCard key={uniqid} song={song} />
                     ))}
                   </Row>
                 </div>
@@ -162,7 +163,7 @@ class Home extends React.Component {
                     id="hipHopSection"
                   >
                     {this.state.hipHopSongs.map((song) => (
-                      <AlbumCard song={song} key={song.id} />
+                      <AlbumCard key={uniqid} song={song} />
                     ))}
                   </Row>
                 </div>
