@@ -4,11 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import uniqid from "uniqid";
 import { connect } from "react-redux";
 
-import { searchSongs } from "../redux/actions/searchSongs";
-
-const mapDispatchToProps = (dispatch) => ({
-  searchMusic: (url, searchQuery) => dispatch(searchSongs(url, searchQuery)),
-});
+//import { searchSongs } from "../redux/actions/searchSongs";
 
 const mapStateToProps = (s) => ({
   searchedSongs: s.searchedSongs.songsData,
@@ -195,4 +191,4 @@ class Home extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, null)(Home);
